@@ -1,0 +1,125 @@
+Q3:
+    a) 
+        i\f: (%x loves(Marry, x))
+        ii\ loves(Marry) 
+    b) 
+        This will mainly gives us the possibility to apply the grammar rules 
+        S[sem=vp(subj)]-> NP[sem=subj] VP[sem=vp] ; in our case subj = John 
+        VP[sem=v] -> V[sem=v] NP[sem=obj] ; v = love, obj= Marry
+        hence we get the object first "Marry" apply to it the verb love to get a VP and then 
+        combine VP with the NP by applying the function love() from VP on the subject to get the sentence: John  loves Marry
+    c) 
+        i\ we can rewrite the f as: (A%x %y woman(x) => loves(x,y))
+        
+        ii\ f(John): for every entry that is a woman, John must love that woman.
+            f: for every entry that is a x, y must love that x.
+
+    d) 
+        f() is a function that describes that the action of love from "x" to "y" is obvious to the observers
+        v: (%x loves(Marry,x))
+        f: (%v %x obvious(v(x)))
+
+        we can apply this "f" in two ways on "Sue obviously loves Mary?"
+
+            ask(%x %y E%e => present(e) ^ obvious(loves(x,y))))(Marry,Sue)      % Sue obviously loves Marry
+
+            ask(E%e => present(e) ^ act(e, loving) ^ lover(e, Sue) ^ lovee(e, Marry) ^ appearance(e, obvious))
+    e) 
+        f the event of act of loving between Mary and Jhon from set of events "e"
+        (%x %y %e present(e) ^ loves(x,y)))
+    f)
+        g function describes the manner of the event love => passionately
+        v: (%x %y %e present(e) ^ loves(x,y)))
+
+        g:  (%v %x %y %e v(x,y,e) ^ manner(e,passionate))  
+            
+    g)
+        i\ v: (%x loves(Marry,x))
+        f: (%v %x A%x => woman(x) ^ v(x))
+        ii\ (%x loves(Mary,x)) : someone loves Mary
+            f(%x loves(Mary,x)): every woman will do something
+            f : evry woman loves  Marry 
+    h)
+        g = (%x %u %v A%x => u(x) ^ v(x))
+        g represent gender 
+    i)
+        i\ f = (%f f(Papa))
+        ii\ Translation to English:
+                f: given a function it will act on Papa
+                I think this semantics given to Papa is needed when a function operates on annother function
+                so with this semantics we can make any functions that requires one variable to operate only on Papa. 
+    
+Q4:
+    For gramatical sentences the system found the following plausible semantics:
+        1\ George love -s Laura . -> sem=Assert(Speaker, Pres(love(Laura,George))) head=love
+        2\ he love -s her . -> sem=Assert(Speaker, Pres(love(her,him))) head=love
+        3\ Papa sleep -s with a spoon -> head=sleep sem=Assert(Speaker, Pres(with(some(spoon),sleep(Papa))))
+        4\ Papa eat -ed with a spoon . -> head=eat sem=Assert(Speaker, Past(with(some(spoon),eat(SOMETHING,Papa))))
+        8\ George kiss -ed every chief of staff . -> sem=Assert(Speaker, Past(kiss(all(chief_of_staff),George))) head=kiss
+        9\ Laura say -s that George might sleep on the floor !  -> sem=Exclaim(Speaker, Pres(say(might(on(the(floor),sleep(George))), Laura))) head=say
+        10\ the perplexed president eat -ed a pickle .  -> sem=Assert(Speaker, Past(eat(some(pickle),the(%x president(x) ^ perplexed(x))))) head=eat
+        11\ Papa is perplexed . -> sem=Assert(Speaker, Pres(perplexed(Papa))) head=be
+        12\ Papa is chief of staff .  -> sem=Assert(Speaker, Pres(chief_of_staff(Papa))) head=be
+        13\ Papa want -ed a sandwich .  -> head=want sem=Assert(Speaker, Past(want(some(sandwich),Papa)))
+        14\ Papa want -ed to eat a sandwich . -> sem=Assert(Speaker, Past(want(eat(some(sandwich),Papa), Papa))) head=want
+        15\ Papa want -ed George to eat a pickle .  -> head=want sem=Assert(Speaker, Past(want(eat(some(pickle),George), Papa)))
+        16\ Papa would have eat -ed his sandwich -s .  -> head=eat sem=Assert(Speaker, would(Perf(eat(the_plural(%x sandwich(x)^possess(x,him)),Papa))))
+        17\ every sandwich was go -ing to have been delicious . -> sem=Assert(Speaker, Past(Prog(Will(Perf(delicious(all(sandwich))))))) head=be
+        19\ have a bonbon ! -> sem=Command(Speaker, possess(some(bonbon))(Hearer)) head=have
+        20\the fine and blue woman and every man must have eat -ed two sandwich -s and sleep -ed on the floor . 
+            head=and sem=Assert(Speaker, must(Perf(eat(two(sandwich),and(the(%x woman(x) ^ (fine(x)^blue(x))),all(man))) ^ on(the(floor),sleep(and(the(%x woman(x) ^ (fine(x)^blue(x))),all(man)))))))
+        
+
+    For gramatical sentences the system found the following non plausible semantics:
+        1\ the bonbon -s on the spoon entice -0 . -> sem=Assert(Speaker, Pres(entice(SOMETHING,the_plural(%x bonbon(x) ^ on(the(spoon),x))))) head=entice
+        The meaning is that bonbons and spoon together are considered as plural and both are entice something, where it in fact the bonnos are only plural and they only entice something
+             sem=Assert(Speaker, Pres(on(the(spoon),entice(SOMETHING,the_plural(%x bonbon(x) ,x))))
+        2\a bonbon on the spoon entice -s .  ->  sem=Assert(Speaker, Pres(entice(SOMETHING,some(%x bonbon(x) ^ on(the(spoon),x))))) head=entice
+
+        3\ Papa eat -ed every bonbon with a spoon . -> head=eat sem=Assert(Speaker, Past(eat(all(%x bonbon(x) ^ with(some(spoon),x)),Papa)))
+        This means that every bobbon is with a spoon and Papa eat that which is wrong. The meaning should be as following:
+        sem=Assert(Speaker, Past(eat(with(some(spoon), all(%x bonbon(x))),Papa)))
+
+        4\ him love -s she -> sem=Assert(Speaker, Pres(love(her,him))) head=love 
+        This does not sound like english because him is suppose to be an object but here it is used as subject based on its position in the sentence.
+        
+
+        
+
+    For the following the result is: No consistent way to assign attributes! 
+        1\ Papa sleep -s every bonbon with a spoon . -> This sentence is not gramatical because sleep is intransitive verb 
+        2\ a bonbon on the spoon entice -0 . -> This is failed because bonbon is singular
+Q5:
+    Changes I made in english.gra: 
+        1\ all determiners that work for plural should work for caviar (mass nouns).
+        2\ all determiners that work for both singular and plural should work for caviar (mass nouns).
+        3\ The auxiliary verbs with mass noun are singular
+    The sentences I use for this question:
+    Gramatical:
+        1\ Papa eat -ed the caviar with a spoon . -> sem=Assert(Speaker, Past(eat(the_plural(%x caviar(x) ^ with(some(spoon),x)),Papa))) head=eat
+        Although the sentence was parsed the meaning is still not correct since Papa ate only caviar and the eating was performed using a spoon not both caviar and the spoon (you can't eat the spoon).
+        2\ all caviar is delicious . -> sem=Assert(Speaker, Pres(delicious(all(caviar)))) 
+    Ungramatical:
+        1\ Papa eat -ed a caviar . -> No consistent way to assign attributes! 
+        This is ungramatical because determiner "a" can not be used with caviar (mass noun)
+         2\ caviar are delicious .  -> No consistent way to assign attributes! 
+         This is ungramatical because determiner auxiliary verb should be singular with caviar (mass noun)
+
+Q6:
+    a) 
+    Det[=1 num=pl sem="%dom %pred E%T [exhaustive(T,dom)] ^ pred(T)"] the
+    this rule means that there exists T, where the T is exhaustive from specific domain  and has some feature specified by predicate 
+
+    Det[=1 num=pl sem="%dom %pred E%first E%second [first!=second ^ dom(first)^dom(second)] ^ pred(first) ^ pred(second)"] two
+    this rule means that there exists first and second where first is different from the second, and both from the same domain, and has some feature specified by predicate 
+
+    b) I modified: ??? -> "%subj 3(2(%obj 1(obj,subj)))"
+    and the meaning now is that there is a pickle and Papa wanted George to eat it 
+    Papa want -ed George to eat a pickle . -> sem=Assert(Speaker, Past(E%b [pickle(b)] ^ eat(b,%subk want(Papa(George), subk))))
+
+        
+
+
+    
+
+

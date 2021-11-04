@@ -1,0 +1,4 @@
+ (ROOT (S (NP Papa) (VP (V (V eat) -ed) (NP (Det the) (N (N caviar) (PP (P with) (NP (Det a) (N spoon))))))) .)
+ (ROOT (S (NP (Det all) (N caviar)) (VP (V is) (Adj delicious))) .)
+ (ROOT (S (NP Papa) (VP (V (V eat) -ed) (NP (Det a) (N caviar)))) .)
+failure

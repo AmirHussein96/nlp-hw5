@@ -1,0 +1,124 @@
+         Papa: Papa 
+         Attributes: sem=Papa head=Papa
+      NP: Papa 
+      Attributes: sem=Papa head=Papa num=sing
+               eat: eat 
+               Attributes: sem=eat head=eat
+            V: eat 
+            Attributes: head=eat tense=stem arg=np sem=%obj %subj eat(obj,subj)
+            Or:       arg=none sem=%subj eat(SOMETHING,subj) tense=stem head=eat
+            -ed: -ed 
+            Attributes: sem=-ed head=-ed
+         V: eat -ed 
+         Attributes: arg=np tense=past sem=%obj %subj eat(obj,subj) head=eat
+         Or:       head=eat arg=np tense=pastp sem=%obj %subj eat(obj,subj)
+         Or:       head=eat sem=%subj eat(SOMETHING,subj) arg=none tense=past
+         Or:       sem=%subj eat(SOMETHING,subj) arg=none tense=pastp head=eat
+               the: the 
+               Attributes: head=the sem=the
+            Det: the 
+            Attributes: num=sing head=the sem=the
+            Or:       head=the num=pl sem=the_plural
+            Or:       num=mass head=the sem=the_plural
+                  caviar: caviar 
+                  Attributes: sem=caviar head=caviar
+               N: caviar 
+               Attributes: num=mass head=caviar sem=caviar
+                     with: with 
+                     Attributes: head=with sem=with
+                  P: with 
+                  Attributes: sem=with head=with
+                        a: a 
+                        Attributes: head=a sem=a
+                     Det: a 
+                     Attributes: sem=some num=sing head=a
+                        spoon: spoon 
+                        Attributes: head=spoon sem=spoon
+                     N: spoon 
+                     Attributes: sem=spoon num=sing head=spoon
+                  NP: a spoon 
+                  Attributes: head=spoon num=sing sem=some(spoon)
+               PP: with a spoon 
+               Attributes: sem=%x with(some(spoon),x) head=with
+            N: caviar with a spoon 
+            Attributes: head=caviar num=mass sem=%x caviar(x) ^ with(some(spoon),x)
+         NP: the caviar with a spoon 
+         Attributes: num=mass head=caviar sem=the_plural(%x caviar(x) ^ with(some(spoon),x))
+      VP: eat -ed the caviar with a spoon 
+      Attributes: head=eat sem=%subj eat(the_plural(%x caviar(x) ^ with(some(spoon),x)),subj) tense=past
+      Or:       head=eat sem=%subj eat(the_plural(%x caviar(x) ^ with(some(spoon),x)),subj) tense=pastp
+   S: Papa eat -ed the caviar with a spoon 
+   Attributes: sem=Past(eat(the_plural(%x caviar(x) ^ with(some(spoon),x)),Papa)) head=eat
+   .: . 
+   Attributes: sem=. head=.
+ROOT: Papa eat -ed the caviar with a spoon . 
+Attributes: head=eat sem=Assert(Speaker, Past(eat(the_plural(%x caviar(x) ^ with(some(spoon),x)),Papa)))
+---
+            all: all 
+            Attributes: head=all sem=all
+         Det: all 
+         Attributes: sem=all num=pl head=all
+         Or:       num=mass head=all sem=all
+            caviar: caviar 
+            Attributes: head=caviar sem=caviar
+         N: caviar 
+         Attributes: head=caviar num=mass sem=caviar
+      NP: all caviar 
+      Attributes: head=caviar num=mass sem=all(caviar)
+            is: is 
+            Attributes: sem=is head=is
+         V: is 
+         Attributes: sem=%pred %subj pred(subj) arg=pred tense=pres num=sing head=be
+         Or:       num=mass head=be sem=%pred %subj pred(subj) tense=pres arg=pred
+            delicious: delicious 
+            Attributes: sem=delicious head=delicious
+         Adj: delicious 
+         Attributes: head=delicious sem=delicious
+      VP: is delicious 
+      Attributes: num=sing head=be tense=pres sem=%subj delicious(subj)
+      Or:       tense=pres sem=%subj delicious(subj) head=be num=mass
+   S: all caviar is delicious 
+   Attributes: sem=Pres(delicious(all(caviar))) head=be
+   .: . 
+   Attributes: head=. sem=.
+ROOT: all caviar is delicious . 
+Attributes: sem=Assert(Speaker, Pres(delicious(all(caviar)))) head=be
+---
+         Papa: Papa 
+         Attributes: sem=Papa head=Papa
+      NP: Papa 
+      Attributes: head=Papa num=sing sem=Papa
+               eat: eat 
+               Attributes: head=eat sem=eat
+            V: eat 
+            Attributes: arg=np tense=stem sem=%obj %subj eat(obj,subj) head=eat
+            Or:       head=eat arg=none tense=stem sem=%subj eat(SOMETHING,subj)
+            -ed: -ed 
+            Attributes: head=-ed sem=-ed
+         V: eat -ed 
+         Attributes: tense=past arg=np sem=%obj %subj eat(obj,subj) head=eat
+         Or:       arg=np sem=%obj %subj eat(obj,subj) tense=pastp head=eat
+         Or:       head=eat arg=none tense=past sem=%subj eat(SOMETHING,subj)
+         Or:       sem=%subj eat(SOMETHING,subj) arg=none tense=pastp head=eat
+               a: a 
+               Attributes: head=a sem=a
+            Det: a 
+            Attributes: head=a num=sing sem=some
+               caviar: caviar 
+               Attributes: head=caviar sem=caviar
+            N: caviar 
+            Attributes: sem=caviar head=caviar num=mass
+         NP: a caviar 
+         No consistent way to assign attributes!  (Maybe another parse?)
+      VP: eat -ed a caviar 
+      No consistent way to assign attributes!  (Maybe another parse?)
+   S: Papa eat -ed a caviar 
+   No consistent way to assign attributes!  (Maybe another parse?)
+   .: . 
+   Attributes: head=. sem=.
+ROOT: Papa eat -ed a caviar . 
+No consistent way to assign attributes!  (Maybe another parse?)
+---
+failure: failure 
+Attributes: sem=failure head=failure
+---
